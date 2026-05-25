@@ -73,6 +73,12 @@
             .story-text { padding: 18px; font-size: 13px; }
             .choice-btn { padding: 12px 14px; font-size: 12px; }
         }
+        .scene-image {
+    width: 100%;
+    margin-bottom: 14px;
+    border: 1px solid #1e2535;
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -171,7 +177,7 @@ const scenes = {
 
     scene5: {
         text: "Прежде, чем ты успеваешь сделать хотя бы шаг, дверь резко отворяется. Высокий мужчина с аккуратно собранными в хвост волосами смотрит на тебя с едва скрываемым раздражением. Ты успеваешь отметить, что он выглядит необычно. Его одежда точно не вписывается в твой потрепанный офис. Это что, китайская накидка? «Ваш офис невозможно найти. Неужели детективам платят настолько плохо?» Он заходит внутрь и закрывает за собой дверь. Ты не можешь избавиться от мысли, что он кого-то очень сильно тебе напоминает.",
-       image: "https://github.com/jonathanflint-call/.../blob/990cf5065bcd4fac78fcfe98e69ca13558327692/image%20(1).png ",
+      image: "https://raw.githubusercontent.com/jonathanflint-call/.../main/image%20(1).png",
         choices: [
             { text: "Я не детектив.", next: "scene6_a" },
             { text: "Я лучший следак в городе, но следы никогда не ведут к банку.", next: "scene6_a" },
@@ -1033,9 +1039,12 @@ const scenes = {
     },
 
     scene_final: {
-        text: "для ривк!! люблю целую",
-        choices: []
-    }
+        scene_final: {
+    text: "для ривк!! люблю целую",
+    gif: "https://raw.githubusercontent.com/jonathanflint-call/ТУТ_НАЗВА_РЕПО/main/ТУТ_НАЗВА_ГІФКИ.gif",
+    choices: []
+},
+
 };
 
 // ── НАВІГАЦІЯ ──────────────────────────────────────────
@@ -1053,7 +1062,19 @@ function goTo(sceneId) {
         startAudio(scene.audio);
     }
 
-    document.getElementById('story-text').textContent = scene.text;
+   document.getElementById('story-text').textContent = scene.text;
+
+    // зображення / гіфка
+    const existingImg = document.querySelector('.scene-image');
+    if (existingImg) existingImg.remove();
+
+    if (scene.image || scene.gif) {
+        const img = document.createElement('img');
+        img.className = 'scene-image';
+        img.src = scene.image || scene.gif;
+        img.alt = '';
+        document.getElementById('audio-container').before(img);
+    }
 
     const choicesDiv = document.getElementById('choices');
     choicesDiv.innerHTML = '';
