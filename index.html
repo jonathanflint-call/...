@@ -116,7 +116,7 @@ function startAudio(url) {
 
     const label = document.createElement('span');
     label.className = 'audio-label';
-    label.textContent = '♪ музична скринька';
+    label.textContent = '♪';
 
     const btn = document.createElement('button');
     btn.className = 'audio-btn';
@@ -126,7 +126,7 @@ function startAudio(url) {
     btn.onclick = () => {
         if (playing) {
             currentAudio && currentAudio.pause();
-            btn.textContent = 'грати';
+            btn.textContent = 'play';
         } else {
             currentAudio && currentAudio.play().catch(() => {});
             btn.textContent = 'пауза';
